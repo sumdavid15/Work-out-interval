@@ -1,8 +1,8 @@
 const roundStartAudio = [
-  new Audio('/audio/go1.mp3'),
-  new Audio('/audio/go2.mp3'),
-  new Audio('/audio/go3.mp3'),
-  new Audio('/audio/yeah-buddy-101soundboards.mp3'),
+  new Audio('audio/go1.mp3'),
+  new Audio('audio/go2.mp3'),
+  new Audio('audio/go3.mp3'),
+  new Audio('audio/yeah-buddy-101soundboards.mp3'),
 ];
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   function playAudio(audio) {
-    const player = new Audio(`/audio/${audio}`);
+    const player = new Audio(`audio/${audio}`);
     currentlyPlayingAudio = player;
     player.play();
   }
