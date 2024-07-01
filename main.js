@@ -10,6 +10,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const intervalContainer = document.querySelector('.interval-container');
   const formSection = document.querySelector('.form');
 
+  const addTimeContainer = document.querySelector('.add-time-container');
+  const addRestTimeEl = document.querySelector('.add-time');
+  const subtractRestTimeEl = document.querySelector('.subtract-time');
+
   let workOutSettings = JSON.parse(localStorage.getItem('workOutSettings')) || {};
 
   let startSoundIndex = 0;
@@ -51,6 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const changeStep = () => {
+    clearInterval(intervalId);
     if (round === workOutSettings.rounds && currentStep === 1) {
       endOfWorkout();
       return;
@@ -60,6 +65,12 @@ document.addEventListener('DOMContentLoaded', () => {
       round++;
     } else {
       ++currentStep;
+    }
+
+    if (steps[currentStep] === 'restTime') {
+      addTimeContainer.style.display = 'block';
+    } else {
+      addTimeContainer.style.display = 'none';
     }
 
     roundsEl.innerHTML = `${round}/${workOutSettings.rounds}`;
@@ -109,12 +120,14 @@ document.addEventListener('DOMContentLoaded', () => {
         ) {
           playAudio('10seconds.mp3');
         }
+        if (timeLeft === 10 && steps[currentStep] === 'restTime') {
+          playAudio('10second.mp3');
+        }
         if (timeLeft < 4) {
           playAudio('beep.mp3');
         }
         updateDisplayTimer();
       } else {
-        clearInterval(intervalId);
         changeStep();
       }
     }, 1000);
@@ -203,6 +216,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function showForm() {
     formSection.style.display = 'block';
     intervalContainer.style.display = 'none';
+    addTimeContainer.style.display = 'none';
     clearInterval(intervalId);
     stopCurrentlyPlayingAudio();
     history.replaceState(null, '', location.pathname);
@@ -211,6 +225,23 @@ document.addEventListener('DOMContentLoaded', () => {
   function showIntervalTimer() {
     formSection.style.display = 'none';
     intervalContainer.style.display = 'block';
+  }
+
+  function addRestTime() {
+    timeLeft += 5;
+    workOutSettings.restTime = workOutSettings.restTime + 5;
+    updateDisplayTimer();
+  }
+
+  function subtractRestTime() {
+    if (timeLeft - 5 < 0) {
+      // changeStep();
+      timeLeft = 0;
+    } else {
+      timeLeft -= 5;
+      workOutSettings.restTime = workOutSettings.restTime - 5;
+    }
+    updateDisplayTimer();
   }
 
   setFormValues();
@@ -232,6 +263,9 @@ document.addEventListener('DOMContentLoaded', () => {
     toggleButton.removeEventListener('click', showForm);
     toggleButton.addEventListener('click', toggleRunning);
     toggleButton.textContent = 'Pause';
+
+    addRestTimeEl.addEventListener('click', addRestTime);
+    subtractRestTimeEl.addEventListener('click', subtractRestTime);
 
     currentStep = 0;
     round = 1;

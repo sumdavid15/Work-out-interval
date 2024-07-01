@@ -77,6 +77,10 @@ button:focus-visible {
   gap: 20px;
   background-color: #1a1a1a;
   padding: 10px;
+
+  > * {
+    min-width: 100px;
+  }
 }
 
 .interval-container {
@@ -88,6 +92,25 @@ button:focus-visible {
   flex-direction: column;
   height: 100%;
   justify-content: space-between;
+
+  .add-time-container {
+    display: none;
+    .action-container {
+      display: flex;
+      justify-content: space-between;
+      padding: 30px;
+      .add-time,
+      .subtract-time {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        background-color: #213547;
+      }
+    }
+  }
 }
 
 #timer-display {
