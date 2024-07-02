@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const seconds = timeLeft % 60;
     let time =
       timeLeft >= 60
-        ? `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`
+        ? `${String(minutes)}:${String(seconds).padStart(2, '0')}`
         : `${String(seconds)}`;
     timerDisplay.textContent = time;
   };
@@ -193,8 +193,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const seconds = roundLength % 60;
     let time =
       roundLength >= 60
-        ? `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}min`
-        : `${String(seconds)}sec`;
+        ? `${String(minutes)}:${String(seconds).padStart(2, '0')}min`
+        : `${String(seconds)}s`;
 
     roundLengthEl.innerHTML = time;
   }

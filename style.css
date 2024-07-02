@@ -94,11 +94,17 @@ button:focus-visible {
   justify-content: space-between;
 
   .add-time-container {
+    position: relative;
     display: none;
+
     .action-container {
       display: flex;
       justify-content: space-between;
       padding: 30px;
+      width: calc(100% - 60px);
+      position: absolute;
+      bottom: 0;
+
       .add-time,
       .subtract-time {
         display: flex;
@@ -108,6 +114,13 @@ button:focus-visible {
         height: 70px;
         border-radius: 50%;
         background-color: #213547;
+        font-size: 20px;
+        cursor: default;
+      }
+
+      .add-time:active,
+      .subtract-time:active {
+      scale: 0.9;
       }
     }
   }
