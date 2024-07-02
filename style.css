@@ -119,11 +119,17 @@ button:focus-visible {
         cursor: default;
         color: white;
         border: none;
+        transition: all 100ms ease-in-out;
       }
 
       .add-time:active,
       .subtract-time:active {
         scale: 0.9;
+      }
+
+      .add-time:focus,
+      .subtract-time:focus {
+        outline: none;
       }
     }
   }
