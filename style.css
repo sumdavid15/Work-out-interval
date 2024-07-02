@@ -77,6 +77,7 @@ button:focus-visible {
   gap: 20px;
   background-color: #1a1a1a;
   padding: 10px;
+  color: white;
 
   > * {
     min-width: 100px;
@@ -116,11 +117,13 @@ button:focus-visible {
         background-color: #213547;
         font-size: 20px;
         cursor: default;
+        color: white;
+        border: none;
       }
 
       .add-time:active,
       .subtract-time:active {
-      scale: 0.9;
+        scale: 0.9;
       }
     }
   }
