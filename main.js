@@ -69,8 +69,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (steps[currentStep] === 'restTime') {
       addTimeContainer.style.display = 'block';
+      updateRoundLength(workOutSettings.restTime);
     } else {
       addTimeContainer.style.display = 'none';
+      updateRoundLength(workOutSettings.roundTime);
     }
 
     roundsEl.innerHTML = `${round}/${workOutSettings.rounds}`;
@@ -187,8 +189,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  function updateRoundLength() {
-    const roundLength = workOutSettings.roundTime;
+  function updateRoundLength(timeSeconds) {
+    const roundLength = timeSeconds;
     const minutes = Math.floor(roundLength / 60);
     const seconds = roundLength % 60;
     let time =
@@ -231,6 +233,7 @@ document.addEventListener('DOMContentLoaded', () => {
     timeLeft += 5;
     workOutSettings.restTime = workOutSettings.restTime + 5;
     updateDisplayTimer();
+    updateRoundLength(workOutSettings.restTime);
   }
 
   function subtractRestTime() {
@@ -242,6 +245,7 @@ document.addEventListener('DOMContentLoaded', () => {
       workOutSettings.restTime = workOutSettings.restTime - 5;
     }
     updateDisplayTimer();
+    updateRoundLength(workOutSettings.restTime);
   }
 
   setFormValues();
@@ -270,7 +274,7 @@ document.addEventListener('DOMContentLoaded', () => {
     currentStep = 0;
     round = 1;
     timeLeft = workOutSettings[steps[currentStep]];
-    updateRoundLength();
+    updateRoundLength(workOutSettings.roundTime);
     roundsEl.innerHTML = `${round}/${workOutSettings.rounds}`;
     timerContainer.style.backgroundColor = roundBGColor[steps[currentStep]];
     updateDisplayTimer();
